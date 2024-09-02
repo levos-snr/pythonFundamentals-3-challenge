@@ -1,3 +1,11 @@
+from rich.console import Console
+from rich.table import Table
+from rich.prompt import Prompt
+from rich import print
+from rich.panel import Panel
+
+console = Console()
+
 def add_numbers(num1, num2):
     """Add two numbers and return the result."""
     return num1 + num2
@@ -24,7 +32,7 @@ def calculate_factorial(n):
 
 def decorator_func(func):
     def wrapper(*args, **kwargs):
-        print("Decorator Applied")
+        console.print("[bold yellow]Decorator Applied[/bold yellow]")
         return func(*args, **kwargs)
     return wrapper
 
@@ -51,68 +59,85 @@ class Car:
     
     def display_info(self):
         """Print the car's information."""
-        print(f"{self.year} {self.make} {self.model}")
+        console.print(f"[bold green] Make: {self.make}")
+        console.print(f"[bold green] Model: {self.model}")
+        console.print(f"[bold green] Year: {self.year}")
+
+def main_menu():
+    table = Table(title="Function Menu")
+    table.add_column("Option", justify="center", style="cyan", no_wrap=True)
+    table.add_column("Description", style="magenta")
+    
+    table.add_row("1", "Add Numbers")
+    table.add_row("2", "Check if a Number is Even")
+    table.add_row("3", "Reverse a String")
+    table.add_row("4", "Count Vowels in a String")
+    table.add_row("5", "Calculate Factorial")
+    table.add_row("6", "Sort a List of People by Age")
+    table.add_row("7", "Merge Two Dictionaries")
+    table.add_row("8", "Display Car Information")
+    table.add_row("9", "Exit")
+    
+    console.print(table)
 
 if __name__ == '__main__':
     while True:
-        print("\nChoose a function to run:")
-        print("1. Add Numbers")
-        print("2. Check if a Number is Even")
-        print("3. Reverse a String")
-        print("4. Count Vowels in a String")
-        print("5. Calculate Factorial")
-        print("6. Sort a List of People by Age")
-        print("7. Merge Two Dictionaries")
-        print("8. Display Car Information")
-        print("9. Exit")
-
-        choice = input("Enter the number of the function you want to run: ")
+        main_menu()
+        
+        choice = Prompt.ask("\n[bold blue]Enter the number of the function you want to run[/bold blue]", choices=[str(i) for i in range(1, 10)])
 
         if choice == '1':
-            num1 = float(input("Enter the first number: "))
-            num2 = float(input("Enter the second number: "))
-            print(f"Result: {add_numbers(num1, num2)}")
+            num1 = float(Prompt.ask("[bold yellow]Enter the first number[/bold yellow]"))
+            num2 = float(Prompt.ask("[bold yellow]Enter the second number[/bold yellow]"))
+            result = add_numbers(num1, num2)
+            console.print(f"[bold green]Result: {result}[/bold green]")
 
         elif choice == '2':
-            number = int(input("Enter a number: "))
-            print(f"Is the number even? {is_even(number)}")
+            number = int(Prompt.ask("[bold yellow]Enter a number[/bold yellow]"))
+            even = is_even(number)
+            console.print(f"[bold green]Is the number even? {even}[/bold green]")
 
         elif choice == '3':
-            text = input("Enter a string to reverse: ")
-            print(f"Reversed string: {reverse_string(text)}")
+            text = Prompt.ask("[bold yellow]Enter a string to reverse[/bold yellow]")
+            reversed_text = reverse_string(text)
+            console.print(f"[bold green]Reversed string: {reversed_text}[/bold green]")
 
         elif choice == '4':
-            text = input("Enter a string to count vowels: ")
-            print(f"Number of vowels: {count_vowels(text)}")
+            text = Prompt.ask("[bold yellow]Enter a string to count vowels[/bold yellow]")
+            vowel_count = count_vowels(text)
+            console.print(f"[bold green]Number of vowels: {vowel_count}[/bold green]")
 
         elif choice == '5':
-            n = int(input("Enter a number to calculate its factorial: "))
-            print(f"Factorial of {n} is: {calculate_factorial(n)}")
+            n = int(Prompt.ask("[bold yellow]Enter a number to calculate its factorial[/bold yellow]"))
+            factorial = calculate_factorial(n)
+            console.print(f"[bold green]Factorial of {n} is: {factorial}[/bold green]")
 
         elif choice == '6':
             people = []
-            n = int(input("Enter the number of people: "))
+            n = int(Prompt.ask("[bold yellow]Enter the number of people[/bold yellow]"))
             for _ in range(n):
-                name = input("Enter name: ")
-                age = int(input("Enter age: "))
+                name = Prompt.ask("[bold yellow]Enter name[/bold yellow]")
+                age = int(Prompt.ask("[bold yellow]Enter age[/bold yellow]"))
                 people.append((name, age))
-            print(f"Sorted by age: {sort_by_age(people)}")
+            sorted_people = sort_by_age(people)
+            console.print(Panel.fit(str(sorted_people), title="Sorted by Age", border_style="green"))
 
         elif choice == '7':
-            dict1 = eval(input("Enter the first dictionary (e.g., {'a': 1, 'b': 2}): "))
-            dict2 = eval(input("Enter the second dictionary (e.g., {'b': 3, 'c': 4}): "))
-            print(f"Merged dictionaries: {merge_dicts(dict1, dict2)}")
+            dict1 = eval(Prompt.ask("[bold yellow]Enter the first dictionary (e.g., {'a': 1, 'b': 2})[/bold yellow]"))
+            dict2 = eval(Prompt.ask("[bold yellow]Enter the second dictionary (e.g., {'b': 3, 'c': 4})[/bold yellow]"))
+            merged_dict = merge_dicts(dict1, dict2)
+            console.print(Panel.fit(str(merged_dict), title="Merged Dictionaries", border_style="green"))
 
         elif choice == '8':
-            make = input("Enter the car make: ")
-            model = input("Enter the car model: ")
-            year = input("Enter the car year: ")
+            make = Prompt.ask("[bold yellow]Enter the car make[/bold yellow]")
+            model = Prompt.ask("[bold yellow]Enter the car model[/bold yellow]")
+            year = Prompt.ask("[bold yellow]Enter the car year[/bold yellow]")
             my_car = Car(make, model, year)
             my_car.display_info()
 
         elif choice == '9':
-            print("Exiting...")
+            console.print("[bold red]Exiting...[/bold red]")
             break
 
         else:
-            print("Invalid choice. Please try again.")
+            console.print("[bold red]Invalid choice. Please try again.[/bold red]")

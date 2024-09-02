@@ -1,8 +1,11 @@
 # Function Runner CLI
+A powerful Python command-line interface (CLI) tool designed to allow users to
+interactively execute a variety of essential functions. 
+With enhanced output formatting using the rich library, 
+this utility provides a versatile and visually appealing user experience.
 
-A simple Python command-line interface (CLI) application that allows users to choose from a variety of functions, input their own data, and execute the selected function interactively.
 
-## Features
+## Features ##
 
 - **Add Numbers**: Adds two numbers and returns the result.
 - **Check Even Number**: Checks whether a number is even.
@@ -13,13 +16,19 @@ A simple Python command-line interface (CLI) application that allows users to ch
 - **Merge Dictionaries**: Merges two dictionaries, summing values for common keys.
 - **Display Car Information**: Creates a car object and displays its information.
 
-## How to Use
+## Getting Started ##
+
+### Prerequisites
+- Python 3.12
+- pipenv (Python dependency manager)
+
+### Installation
 
 1. **Clone the repository**:
 
    ```bash
-   git clone github-url
-   cd 
+   git clone https://github.com/levos-snr/pythonFundamentals-3-challenge.git
+   cd pythonFundamentals-3-challenge
    ```
 2. **Install the required dependencies**:
 
@@ -32,8 +41,11 @@ A simple Python command-line interface (CLI) application that allows users to ch
    ```bash
    pipenv run python main.py
    ```
+   
+### Usage ##
+- Launch the CLI: Upon running the application, 
+you will be presented with a menu of functions.
 4. **Choose a function to run**:
-- The CLI will display a menu of available functions.
 - Enter the number corresponding to the function you want to execute.
 - Input the required data as prompted.
 - The result will be displayed after execution.
@@ -41,7 +53,7 @@ A simple Python command-line interface (CLI) application that allows users to ch
 5. **Exit the application**:
 - Enter `9` to exit the application.
 
-## Example Usage ##
+## Example ##
   
    ```bash
    Choose a function to run:
@@ -59,11 +71,17 @@ A simple Python command-line interface (CLI) application that allows users to ch
    Enter the second number: 7
    Result: 12
    ```
+   
+## Enhanced Output with `rich` ##
+- This application uses the rich package to display beautifully 
+formatted text, tables, and more.
+Enjoy a better visual experience while interacting with the CLI.
 
-## Dependencies ##
+## Project Dependencies ##
 
-- Python 3.x
-- pipenv
+- Python 3.12: The core programming language used.
+- pipenv: For managing virtual environments and dependencies.
+- rich: For enhanced output formatting.
 
 ## License ##
 

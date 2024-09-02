@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+rich = "13.6.0"
 
 [dev-packages]
 
